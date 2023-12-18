@@ -50,7 +50,7 @@ h1 {
     border-radius: 50%;
 }*/
 
-.profilepic--wrapper {
+.profilepic--wrapper, .photographer--picture {
     width: 200px;
     height: 200px;
     overflow: hidden;
@@ -60,8 +60,8 @@ h1 {
     max-width: 200px;
     max-height: 200px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center;
+    align-items: center; */
 }
 
 .profilepic--bgcover {
@@ -105,4 +105,64 @@ article .profilepic:nth-of-type(3), article .profilepic:nth-of-type(4) {
 
 .pp--top {
     border-radius: 50%;
+}
+
+.photographer--media {
+    margin: 0 100px;
+}
+
+.sort {
+    display: initial;
+}
+
+select {
+    padding: 20px 15px;
+    background-color: #901C1C;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    font-weight: 600;
+}
+
+.photographer--media .media {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.media--content {
+    width: 350px;
+    height: 351px;
+}
+
+.media--content__medium {
+    height: 300px;
+    width: -webkit-fill-available;
+    border-radius: 3px;
+}
+
+.media--content h3 {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.media--content h3 span {
+    display: flex;
+}
+
+.like {
+    width: 21px;
+    height: 24px;
+}
+
+.likes-and-price {
+    z-index: 10;
+    background-color: #DB8876;
+    border-radius: 3px 3px 0 0;
+    width: 376px;
+    height: 89px;
+    position: fixed;
+    bottom: 0;
+    right: 36px;
 }

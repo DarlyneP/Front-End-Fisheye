@@ -74,7 +74,7 @@ function photographerTemplate(data) {
         const p = document.createElement('p')
         p.textContent = tagline;
         const span = document.createElement('span')
-        span.textContent = price
+        span.textContent = `${price}€/jour`
         //* adding detail elements
         detailsSection.appendChild(h3)
         detailsSection.appendChild(p)

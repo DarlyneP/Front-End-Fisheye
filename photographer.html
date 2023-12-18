@@ -15,7 +15,37 @@
     </header>
     <main id="main">
       <div class="photograph-header">
+        <section class="photographer--details">
+          <h1 class="profile--name"></h1>
+          <h2 class="profile--location"></h2>
+          <p class="profile--tagline"></p>
+        </section>
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <section class="photographer--picture">
+          <img src="" alt="">
+        </section>
+      </div>
+      <div class="photographer--media">
+        <form action="" method="get" class="sort">
+          <label for="trier par">Trier par</label>
+          <select value="Trier par">
+            <option value="popularite">Popularité</option>
+            <option value="date">Date</option>
+            <option value="titre">Titre</option>
+          </select>
+        </form>
+        <section class="media">
+          
+        </section>
+      </div>
+      <div class="likes-and-price">
+        <span>
+          <p class="likes-total"></p>
+          <img src="assets/icons/favorite-24px 1 black.svg" alt="" class="like">
+        </span>
+        <span>
+          <p class="price"></p>
+        </span>
       </div>
     </main>
     <div id="contact_modal">
