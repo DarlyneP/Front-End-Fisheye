@@ -36,6 +36,7 @@ function fillPage(photographer, media) {
 
     //& Fill media section
     let mediaCaroussel = [];
+    let carousselIndex = 0;
     for (const medium of media) {
         //* summing up likes of each media to show total of likes
         likesCount += medium.likes;
@@ -44,24 +45,35 @@ function fillPage(photographer, media) {
         mediaContent.classList.add('media--content')
         
         let img;
+        let mediaItem = {
+            mediaTitle: "",
+            mediaContent: ""
+        }
         if (medium.image) {
             img = document.createElement('img')
             img.setAttribute('src', `Sample Photos/${photographer.name.split(' ')[0]}/${medium.image}`);
-            mediaCaroussel.push(medium.image)
+            mediaItem.mediaContent = medium.image
+            //mediaCaroussel.push(medium.image)
             //localStorage.mediaCaroussel.push(medium.image)
         } else if (medium.video) {
             img = document.createElement('video')
             img.setAttribute('src', `Sample Photos/${photographer.name.split(' ')[0]}/${medium.video}`);
             //img.setAttribute('controls', 'controls'); //maybe hide controls, overlay a play icon & show controls in modal play window.
-            mediaCaroussel.push(medium.video)
+            mediaItem.mediaContent = medium.video
+            //mediaCaroussel.push(medium.video)
             //localStorage.mediaCaroussel.push(medium.video)
         }
         img.setAttribute('title', `${medium.title}`)
         img.classList.add('media--content__medium')
         img.addEventListener("click", openFocus)
+        img.setAttribute('index', `${carousselIndex}`)
+        carousselIndex += 1;
 
         const title = document.createElement('h3')
         title.textContent = medium.title;
+        mediaItem.mediaTitle = medium.title
+
+        mediaCaroussel.push(mediaItem)
 
         const details = document.createElement('span');
         const likesAmount = document.createElement('p');
@@ -106,7 +118,7 @@ function fillPage(photographer, media) {
     const price = document.querySelector('.likes-and-price .price')
     price.textContent = `${photographer.price}€ / jour`;
 
-    localStorage.setItem("mediaCaroussel", mediaCaroussel);
+    localStorage.setItem("mediaCaroussel", mediaCaroussel.stringify());
     /*for (const medium of mediaCaroussel) {
         medium.addEventListener("click", openFocus)
         //medium.addEventListener("")
@@ -124,9 +136,11 @@ function openFocus(event) {
     const targetTitle = event.currentTarget.attributes.title.textContent
     const src = event.currentTarget.attributes.src.textContent //! same as above
     const targetMedium = src.split("/")[2]
+    const index = event.currentTarget.attributes.index.value
 
     console.log(src)
     console.log(targetMedium)
+    console.log('caroussel index : ', index)
 
     let photographer = localStorage.currentPhotographerName
 
@@ -159,6 +173,7 @@ function openFocus(event) {
         medium.setAttribute('controls', 'controls');
     }
     medium.setAttribute('src', `Sample Photos/${photographer}/${targetMedium}`);
+    medium.setAttribute('index', `${index}`) //& récupération & mise en place de l'index pour le caroussel
     medium.classList.add('mb-medium')
     const title = document.createElement('p')
     title.classList.add('medium--title')
@@ -179,6 +194,12 @@ function openFocus(event) {
     const rightArrow = document.createElement('img')
     rightArrow.setAttribute('src', `assets/icons/expand_more-24px 5.svg`);
     rightArrow.classList.add('rightarrow')
+    rightArrow.addEventListener("click", /* nextMedia */ (event) => {
+        let mediaCaroussel = JSON.parse(localStorage.mediaCaroussel)
+        const currentIndex = event.currentTarget.attributes.index.value
+        const nextIndex = currentIndex += 1
+        const nextMedia = mediaCaroussel[nextIndex]
+    })
     rightSide.appendChild(close)
     rightSide.appendChild(rightArrow)
 

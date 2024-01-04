@@ -247,6 +247,10 @@ select {
     margin-bottom: 70px;
 }
 
+.leftarrow:hover, .rightarrow:hover {
+    cursor: pointer;
+} 
+
 .close {
     width: 72px;
     height: 72px;
