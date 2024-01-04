@@ -26,7 +26,7 @@ function fillPage(photographer, media) {
     const name = document.querySelector('.profile--name')
     name.textContent = photographer.name
     const location = document.querySelector('.profile--location')
-    location.textContent = photographer.city
+    location.textContent = `${photographer.city}, ${photographer.country}`
     const tagline = document.querySelector('.profile--tagline')
     tagline.textContent = photographer.tagline
     const profilePicture = document.querySelector('.photographer--picture img')
@@ -163,12 +163,25 @@ function openFocus(event) {
     leftArrow.classList.add('leftarrow')
     leftArrow.addEventListener("click", /* previousMedia */ (event) => {
         let mediaCaroussel = JSON.parse(localStorage.mediaCaroussel)
-        const previousIndex = currentIndex -= 1
-        const previousMedium = mediaCaroussel[previousIndex]
-        let mediumDisplay = document.querySelector('.mb-medium')
-        let mediumDisplayTitle = document.querySelector('.medium--title')
-        mediumDisplay.setAttribute('src', `Sample Photos/${photographer}/${previousMedium.mediaContent}`)
-        mediumDisplayTitle.textContent = `${previousMedium.mediaTitle}`;
+        let previousMedium;
+        if (currentIndex === 0) {
+
+            previousMedium = mediaCaroussel[mediaCaroussel.length - 1]
+            let mediumDisplay = document.querySelector('.mb-medium')
+            let mediumDisplayTitle = document.querySelector('.medium--title')
+            mediumDisplay.setAttribute('src', `Sample Photos/${photographer}/${previousMedium.mediaContent}`)
+            mediumDisplayTitle.textContent = `${previousMedium.mediaTitle}`;
+
+        } else {
+
+            const previousIndex = currentIndex -= 1
+            previousMedium = mediaCaroussel[previousIndex]
+            let mediumDisplay = document.querySelector('.mb-medium')
+            let mediumDisplayTitle = document.querySelector('.medium--title')
+            mediumDisplay.setAttribute('src', `Sample Photos/${photographer}/${previousMedium.mediaContent}`)
+            mediumDisplayTitle.textContent = `${previousMedium.mediaTitle}`;
+
+        }
     })
     leftSide.appendChild(leftArrow)
 

@@ -25,6 +25,13 @@ function photographerTemplate(data) {
         //vignette.setAttribute("href", "photographer.html") //! only with <a href=""> instead of "onclick"
         vignette.setAttribute("id", id)
         vignette.setAttribute("onclick", "loadUserProfile(event)")
+        vignette.setAttribute("alt", name) //! accessibility : navigating across profiles
+        vignette.setAttribute("tabindex", "0") //! accessibility : keyboard navigation
+        vignette.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                loadUserProfile(event)
+            }
+        }) //! accessibility : going to photographer profile
         vignette.classList.add('vignette');
         //* creating name of the photographer
         const h2 = document.createElement( 'h2' );
