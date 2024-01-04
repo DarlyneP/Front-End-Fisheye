@@ -19,6 +19,9 @@ async function getPhotographer() {
 }
 
 function fillPage(photographer, media) {
+
+    localStorage.setItem("currentPhotographerName", photographer.name.split(' ')[0])
+
     //& Fill photographer header
     const name = document.querySelector('.profile--name')
     name.textContent = photographer.name
@@ -30,23 +33,32 @@ function fillPage(photographer, media) {
     profilePicture.setAttribute("src", `assets/photographers/${photographer.portrait}`)
 
     let likesCount = 0;
+
     //& Fill media section
+    let mediaCaroussel = [];
     for (const medium of media) {
+        //* summing up likes of each media to show total of likes
         likesCount += medium.likes;
 
         const mediaContent = document.createElement('div');
         mediaContent.classList.add('media--content')
-
+        
         let img;
         if (medium.image) {
             img = document.createElement('img')
             img.setAttribute('src', `Sample Photos/${photographer.name.split(' ')[0]}/${medium.image}`);
+            mediaCaroussel.push(medium.image)
+            //localStorage.mediaCaroussel.push(medium.image)
         } else if (medium.video) {
             img = document.createElement('video')
             img.setAttribute('src', `Sample Photos/${photographer.name.split(' ')[0]}/${medium.video}`);
-            img.setAttribute('controls', 'controls'); //maybe hide controls, overlay a play icon & show controls in modal play window.
+            //img.setAttribute('controls', 'controls'); //maybe hide controls, overlay a play icon & show controls in modal play window.
+            mediaCaroussel.push(medium.video)
+            //localStorage.mediaCaroussel.push(medium.video)
         }
+        img.setAttribute('title', `${medium.title}`)
         img.classList.add('media--content__medium')
+        img.addEventListener("click", openFocus)
 
         const title = document.createElement('h3')
         title.textContent = medium.title;
@@ -56,7 +68,29 @@ function fillPage(photographer, media) {
         likesAmount.textContent = `${medium.likes}`
         const like = document.createElement('img');
         like.setAttribute('src', 'assets/icons/favorite-24px 1.svg')
+        like.setAttribute('liked', 'false')
         like.classList.add('like')
+        like.addEventListener("click", /*toggleLike*/ (event) => {
+            let nbLikes = event.currentTarget.previousSibling.innerHTML * 1
+            let totalLikes = document.querySelector('.likes-total').textContent * 1;
+            console.log(event.currentTarget)
+            let likeStatus = event.currentTarget.attributes.liked.value // .nodeValue or .textContent also working
+            if (likeStatus === 'false') {
+                //likeStatus = 'true'
+                like.setAttribute('liked', 'true')
+                nbLikes += 1
+                totalLikes += 1
+                event.currentTarget.previousSibling.innerHTML = `${nbLikes}`;
+                document.querySelector('.likes-total').textContent = `${totalLikes}`;
+            } else if (likeStatus === 'true') {
+                //likeStatus = 'false'
+                like.setAttribute('liked', 'false')
+                nbLikes -= 1
+                totalLikes -= 1
+                event.currentTarget.previousSibling.innerHTML = `${nbLikes}`;
+                document.querySelector('.likes-total').textContent = `${totalLikes}`;
+            }
+        })
 
         const mediaSection = document.querySelector('.media')
         mediaSection.appendChild(mediaContent)
@@ -67,10 +101,90 @@ function fillPage(photographer, media) {
         details.appendChild(like)
     }
     const totalLikes = document.querySelector('.likes-and-price p')
-    totalLikes.textContent = `${likesCount}`;
+    totalLikes.textContent = `${likesCount} `;
 
     const price = document.querySelector('.likes-and-price .price')
-    price.textContent = `${photographer.price}€/jour`;
+    price.textContent = `${photographer.price}€ / jour`;
+
+    localStorage.setItem("mediaCaroussel", mediaCaroussel);
+    /*for (const medium of mediaCaroussel) {
+        medium.addEventListener("click", openFocus)
+        //medium.addEventListener("")
+    }*/
+}
+
+function openFocus(event) {
+    console.log(event.currentTarget.src)
+    console.log(event.currentTarget.attributes)
+    console.log(event.currentTarget.attributes.src)
+    //console.log(event.currentTarget.attributes.src.split("/")[2])
+    console.log(event.currentTarget)
+
+    //const src = event.currentTarget.attributes.src.nodeValue
+    const targetTitle = event.currentTarget.attributes.title.textContent
+    const src = event.currentTarget.attributes.src.textContent //! same as above
+    const targetMedium = src.split("/")[2]
+
+    console.log(src)
+    console.log(targetMedium)
+
+    let photographer = localStorage.currentPhotographerName
+
+    //* creating modal for mediabox
+    const mbModal = document.createElement('div')
+    mbModal.classList.add('mb-modal')
+    document.querySelector('body').appendChild(mbModal)
+
+    //* creating mediabox
+    const mediaBox = document.createElement('div')
+    mediaBox.classList.add('mediabox')
+    mbModal.appendChild(mediaBox)
+
+    const leftSide = document.createElement('div')
+    leftSide.classList.add('leftside')
+    const leftArrow = document.createElement('img')
+    leftArrow.setAttribute('src', `assets/icons/expand_more-24px 4.svg`);
+    leftArrow.classList.add('leftarrow')
+    leftSide.appendChild(leftArrow)
+
+    const center = document.createElement('div')
+    center.classList.add('media-display')
+    let medium;
+    if (targetMedium.includes('jpg')) {
+        medium = document.createElement('img')
+        //medium.setAttribute('src', `Sample Photos/${photographer.name.split(' ')[0]}/${targetMedium}`);
+    } else if (targetMedium.includes('mp4')) {
+        medium = document.createElement('video')
+        //medium.setAttribute('src', `Sample Photos/${photographer.name.split(' ')[0]}/${targetMedium}`);
+        medium.setAttribute('controls', 'controls');
+    }
+    medium.setAttribute('src', `Sample Photos/${photographer}/${targetMedium}`);
+    medium.classList.add('mb-medium')
+    const title = document.createElement('p')
+    title.classList.add('medium--title')
+    title.textContent = `${targetTitle}`;
+
+    center.appendChild(medium)
+    center.appendChild(title)
+
+    const rightSide = document.createElement('div')
+    rightSide.classList.add('rightside')
+    const close = document.createElement('img')
+    close.setAttribute("src", `assets/icons/close-24px 1.svg`)
+    close.classList.add('close')
+    close.addEventListener("click", () => {
+        mbModal.style.display = "none"
+        document.querySelector('body').removeChild(mbModal)
+    })
+    const rightArrow = document.createElement('img')
+    rightArrow.setAttribute('src', `assets/icons/expand_more-24px 5.svg`);
+    rightArrow.classList.add('rightarrow')
+    rightSide.appendChild(close)
+    rightSide.appendChild(rightArrow)
+
+    mediaBox.appendChild(leftSide)
+    mediaBox.appendChild(center)
+    mediaBox.appendChild(rightSide)
 }
 
 getPhotographer()

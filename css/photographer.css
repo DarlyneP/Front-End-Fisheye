@@ -1,11 +1,19 @@
 #contact_modal {
     display: none;
+    /* display: flex; */
+    width: 100%;
+    height: 100%;
 }
 
 .photograph-header {
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .contact_button {
@@ -21,10 +29,18 @@
     cursor: pointer;
 }
 
+.photographer--picture img {
+    width: -webkit-fill-available;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 .modal {
     border-radius: 5px;
     background-color: #DB8876;
-    width: 50%;
+    /* width: 50%; */
+    width: 90%;
+    height: 89%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,21 +52,31 @@
 .modal header {
     justify-content: space-between;
     width: 100%;
+    margin-bottom: 30px;
 }
 
 .modal header img {
     cursor: pointer;
 }
 
-.modal header h2 {
+.modal header h2, .modal header p {
     font-size: 64px;
+    /* font-size: 9.56%; */
+    /* (64px / 669px = 9.5665172%) */
     font-weight: normal;
     text-align: center;
 }
 
+.header--text {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 form {
     display: flex;
-    width: 100%;
+    /* width: 100%; */
+    width: 97%;
+    height: 90%;
     flex-direction: column;
     align-items: flex-start;
 }
@@ -58,6 +84,7 @@ form {
 form label {
     color: #312E2E;
     font-size: 36px;
+    padding: 10px 0;
 }
 
 form div {
@@ -70,7 +97,194 @@ form div {
 
 form input {
     width: 100%;
-    height: 68px;
+    /* height: 68px; */
+    height: 9.86%;
+    /* (66px / 669px = 9.8654709%. upped to 20% approx to match figma proportions) */
     border: none;
     border-radius: 5px;
+}
+
+/** PHOTOGRAPHER PROFILE */
+
+.contact-modalbg {
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    position: absolute;
+    z-index: 20;
+    top: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.modal {
+    /* width: 46.45%; */
+    /* (669px / 1440 px = 46,4583333%) */
+    /* height: 87.89%; */
+    /* (900px / 1024px = 87.890625%) */
+
+    width: 44.03%;
+    /* (634px / 1440 px = 46,4583333%) */
+    height: 84.47%;
+    /* (865px / 1024px = 87.890625%) */
+}
+
+/* .modal h2, .modal p {
+    display: block;
+} */
+
+.sort {
+    display: initial;
+}
+
+select {
+    padding: 20px 15px;
+    background-color: #901C1C;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    font-weight: 600;
+}
+
+.photographer--media .media {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.media--content {
+    width: 350px;
+    height: 351px;
+}
+
+.media--content__medium {
+    height: 300px;
+    width: -webkit-fill-available;
+    border-radius: 3px;
+    /* object-fit: initial; */
+    object-fit: cover;
+}
+
+.media--content__medium:hover {
+    cursor: pointer;
+}
+
+.media--content h3 {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.media--content h3 span {
+    display: flex;
+}
+
+.like {
+    width: 21px;
+    height: 24px;
+}
+
+.like:hover {
+    cursor: pointer;
+}
+
+.likes-and-price {
+    z-index: 10;
+    background-color: #DB8876;
+    border-radius: 3px 3px 0 0;
+    width: 376px;
+    height: 89px;
+    position: fixed;
+    bottom: 0;
+    right: 36px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.likes-and-price span:nth-of-type(1) {
+    display: flex;
+    align-items: center;
+}
+
+/** MEDIABOX */
+.mb-modal {
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    /* position: absolute; */
+    position: fixed;
+    z-index: 20;
+    top: 0;
+    display: flex;
+    justify-content: center;
+}
+
+
+.mediabox {
+    margin-top: 40px;
+    width: 87.01%; /** 1253/1440px = 87.01388889 */
+    height: 96.1%; /** 984/1024px = 96.09375*/
+    display: flex;
+    justify-content: center;
+    /* margin-left: 101px; */
+    /* margin-left: 7.01%; 101/1440px = 7.01388889 */
+}
+
+.leftside, .rightside {
+    height: 100%;
+    display: flex;
+}
+
+.leftside, .rightside {
+    align-items: center;
+}
+
+.leftarrow, .rightarrow {
+    width: 96px;
+    height: 96px;
+    /* margin-bottom: -40px; */
+    margin-bottom: 70px;
+}
+
+.close {
+    width: 72px;
+    height: 72px;
+    position: absolute;
+    top: 0;
+}
+
+.close:hover {
+    cursor: pointer;
+}
+
+.media-display {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    /* width: 1050px; */
+    width: 100%;
+    /* width: 72.91%;  72.9166667 */
+    width: 51.91%; 
+}
+
+.mb-medium {
+    width: 100%;
+    height: 87.89%; /** 87.890626 */
+}
+
+/** OPTION BOX */
+.custom-optionbox {
+    width: 170px;
+    height: 170px;
+    border-radius: 5px;
+    background-color: #901C1C;
+    position: absolute;
+    z-index: 20;
+}
+
+/**  FORM */
+textarea {
+    border: none;
+    border-radius: 3px;
 }
