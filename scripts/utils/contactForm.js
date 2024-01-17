@@ -6,11 +6,13 @@ function displayModal() {
     document.querySelector('body').appendChild(contactModalBg)
 	// modal.style.display = "block";
 	modal.style.display = "flex";
-
+    
     const name = modal.getElementsByClassName('name')[0]
     const photographerName = document.querySelector('.profile--name').textContent
     // name.textContent = `${localStorage.photographer.name}`;
     name.textContent = `${photographerName}`;
+    const validateBtn = document.querySelector('.contact_button_send')
+    validateBtn.addEventListener("click", validateContactForm)
 }
 
 function closeModal() {
@@ -34,7 +36,7 @@ class ContactForm {
         // window.open('mailto:test@example.com?subject=subject&body=body');
     }
 }
-const validateBtn = document.querySelector('.contact_button')
+
 function validateContactForm (event) {
     event.preventDefault()
     const contactForm = document.querySelector('.modal form div')
@@ -46,5 +48,3 @@ function validateContactForm (event) {
     const mail = new ContactForm(inputs[0].value, inputs[1].value, inputs[2].value, message.value)
     console.log(mail)
 }
-
-validateBtn.addEventListener("click", validateContactForm)

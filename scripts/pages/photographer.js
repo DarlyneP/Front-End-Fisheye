@@ -15,13 +15,15 @@ async function getPhotographer() {
     }
     console.log(photographer);
     console.log(photographerMedia);
+    console.log(photographerMedia[0])
+    console.log(photographerMedia[0][2])
     fillPage(photographer, photographerMedia)
 }
 
 function fillPage(photographer, media) {
-
+    
     localStorage.setItem("currentPhotographerName", photographer.name.split(' ')[0])
-
+    
     //& Fill photographer header
     const name = document.querySelector('.profile--name')
     name.textContent = photographer.name
@@ -31,13 +33,14 @@ function fillPage(photographer, media) {
     tagline.textContent = photographer.tagline
     const profilePicture = document.querySelector('.photographer--picture img')
     profilePicture.setAttribute("src", `assets/photographers/${photographer.portrait}`)
-
+    
     let likesCount = 0;
-
+    
     //& Fill media section
     let mediaCaroussel = [];
     let carousselIndex = 0;
     for (const medium of media) {
+        const { id, photographerId, mediumType, title, likes, date, price } = medium; //factory pattern
         //* summing up likes of each media to show total of likes
         likesCount += medium.likes;
 
@@ -69,8 +72,8 @@ function fillPage(photographer, media) {
         img.setAttribute('index', `${carousselIndex}`)
         carousselIndex += 1;
 
-        const title = document.createElement('h3')
-        title.textContent = medium.title;
+        const mediumTitle = document.createElement('h3')
+        mediumTitle.textContent = medium.title;
         mediaItem.mediaTitle = medium.title
 
         mediaCaroussel.push(mediaItem)
@@ -107,8 +110,8 @@ function fillPage(photographer, media) {
         const mediaSection = document.querySelector('.media')
         mediaSection.appendChild(mediaContent)
         mediaContent.appendChild(img)
-        mediaContent.appendChild(title)
-        title.appendChild(details)
+        mediaContent.appendChild(mediumTitle)
+        mediumTitle.appendChild(details)
         details.appendChild(likesAmount)
         details.appendChild(like)
     }
@@ -236,3 +239,5 @@ function openFocus(event) {
 }
 
 getPhotographer()
+
+export {fillPage};
