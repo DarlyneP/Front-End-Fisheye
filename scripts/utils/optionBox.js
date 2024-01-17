@@ -37,10 +37,11 @@ function showCustomBox (event) {
             cbOption.classList.add('cb-option')
             cbOption.textContent = `${optionsList[index]}`;
             cbOption.setAttribute('name', optionsList[index])
+            cbOption.setAttribute('tabindex', "0")
             cbOption.addEventListener("click", sortMedia)
             cbOption.addEventListener("keydown", (event) => {
                 if (event.key === "Enter") {
-                    sortMedia()
+                    sortMedia(event.currentTarget)
                 }
             })
             customOptionBox.appendChild(cbOption)
@@ -58,18 +59,23 @@ function showCustomBox (event) {
 
 select.addEventListener("mousedown", showCustomBox)
 select.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowDown") {
+    if (event.key === /*"ArrowDown"*/ "Enter") {
        showCustomBox(event)
     }
 }) //! accessibility : opening sorting box
 
 function sortMedia(event) {
     closeCustomOptionBox()
-    const sortMethod = event.currentTarget.attributes.name.value
+    let sortMethod = "";
+    if (event.currentTarget) {
+        sortMethod = event.currentTarget.attributes.name.value //& click event
+    } else {
+        sortMethod = event.textContent //& with keydown event, "currentTarget" does not exist, only event exists.
+    }
     console.log('clicked')
-    console.log(event.currentTarget.attributes.name); // prints ' name="value" '
-    console.log(event.currentTarget.attributes.name.value); // prints 'value'
-    console.log(event.currentTarget.attributes);
+    //console.log(event.currentTarget.attributes.name); // prints ' name="value" '
+    //console.log(event.currentTarget.attributes.name.value); // prints 'value'
+    //console.log(event.currentTarget.attributes);
     console.log('sortMethod : ', sortMethod);
 
     sortMethod === "Popularité"? console.log('yes') : console.log('no');
