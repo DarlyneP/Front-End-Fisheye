@@ -1,19 +1,23 @@
 // todo : slider navigation with keyboard
 function accessibleLightbox () {
     const lightbox = document.querySelector('.mediabox')
-    if (lightbox) {
-        const leftArrow = document.querySelector('.leftarrow')
-        const rightArrow = document.querySelector('.rightarrow')
-        leftArrow.addEventListener("keydown", (event) => {
+    if (lightbox) { //? checking lightbox exists before assigning events on left & right arrows that are in it
+        /*const leftArrow = document.querySelector('.leftarrow')
+        const rightArrow = document.querySelector('.rightarrow')*/
+        window.addEventListener("keydown", (event) => {
             console.log(event);
-            if (event.key === "ArrowLeft") {
-                previousMediumSlide()
+            if (lightbox) { //? checking if lightbox exists so that event only activates when lightbox is on
+                if (event.key === "ArrowLeft") {
+                    previousMediumSlide()
+                } 
             }
         })
-        rightArrow.addEventListener("keydown", (event) => {
+        window.addEventListener("keydown", (event) => {
             console.log(event);
-            if (event.key === "ArrowRight") {
-                nextMediumSlide()
+            if (lightbox) {
+                if (event.key === "ArrowRight") {
+                    nextMediumSlide()
+                }  
             }
         })
     }
@@ -21,9 +25,11 @@ function accessibleLightbox () {
 
 function previousMediumSlide() {
     
-    let currentIndex = document.querySelector('.mb-medium').attributes.index.value
+    let mediaBox = document.querySelector('.mediabox')
+    let currentIndex = mediaBox.querySelector('.mb-medium').attributes.index.value
     let mediaCaroussel = JSON.parse(localStorage.mediaCaroussel)
     let previousMedium;
+    let center = document.querySelector('.media-display')
     if (currentIndex === 0) {
 
         const currentMedium = mediaCaroussel[currentIndex];
@@ -55,6 +61,7 @@ function previousMediumSlide() {
                 insertPreviousMedia.setAttribute('src', `Sample Photos/${photographer}/${previousMedium.mediaContent}`)
                 const previousMediaTitle = document.createElement('p')
                 previousMediaTitle.classList.add('medium--title')
+                previousMediaTitle.setAttribute('index', `${mediaCaroussel.length - 1}`) //& adding index again when medium is removed & recreated
                 previousMediaTitle.textContent = `${previousMedium.mediaTitle}`
 
                 center.appendChild(insertPreviousMedia)
@@ -72,6 +79,7 @@ function previousMediumSlide() {
                 insertPreviousMedia.setAttribute('src', `Sample Photos/${photographer}/${previousMedium.mediaContent}`)
                 const previousMediaTitle = document.createElement('p')
                 previousMediaTitle.classList.add('medium--title')
+                previousMediaTitle.setAttribute('index', `${mediaCaroussel.length - 1}`) //& adding index again when medium is removed & recreated
                 previousMediaTitle.textContent = `${previousMedium.mediaTitle}`
                 
                 center.appendChild(insertPreviousMedia)
@@ -115,6 +123,7 @@ function previousMediumSlide() {
                 insertPreviousMedia.setAttribute('src', `Sample Photos/${photographer}/${previousMedium.mediaContent}`)
                 const previousMediaTitle = document.createElement('p')
                 previousMediaTitle.classList.add('medium--title')
+                previousMediaTitle.setAttribute('index', `${previousIndex}`) //& adding index again when medium is removed & recreated
                 previousMediaTitle.textContent = `${previousMedium.mediaTitle}`
 
                 center.appendChild(insertPreviousMedia)
@@ -132,6 +141,7 @@ function previousMediumSlide() {
                 insertPreviousMedia.setAttribute('src', `Sample Photos/${photographer}/${previousMedium.mediaContent}`)
                 const previousMediaTitle = document.createElement('p')
                 previousMediaTitle.classList.add('medium--title')
+                previousMediaTitle.setAttribute('index', `${previousIndex}`) //& adding index again when medium is removed & recreated
                 previousMediaTitle.textContent = `${previousMedium.mediaTitle}`
                 
                 center.appendChild(insertPreviousMedia)
@@ -148,8 +158,10 @@ function previousMediumSlide() {
 
 function nextMediumSlide() {
 
-    let currentIndex = document.querySelector('.mb-medium').attributes.index.value
     let mediaCaroussel = JSON.parse(localStorage.mediaCaroussel)
+    let carousselLenghtComparator = mediaCaroussel.length - 1
+    let center = document.querySelector('.media-display')
+    let currentIndex = document.querySelector('.mb-medium').attributes.index.value
     const currentMedium = mediaCaroussel[currentIndex];
     const currentMediumType = currentMedium.mediaContent.split('.')[1]
 
@@ -157,9 +169,75 @@ function nextMediumSlide() {
     const nextIndex = 1 * currentIndex + 1
     currentIndex += 1
 
-    const nextMedium = mediaCaroussel[nextIndex]
+    let nextMedium = mediaCaroussel[nextIndex]
     const nextMediumType = nextMedium.mediaContent.split('.')[1]
 
+    //* Handling going from last medium back to first medium
+    if (currentIndex === carousselLenghtComparator) {
+        
+        //todo : compare types of current & next media
+        if (currentMediumType === nextMediumType) {
+
+            let resetIndex = 0; //& going back to the start of the slider so 0
+            nextMedium = mediaCaroussel[resetIndex]
+            
+            let mediumDisplay = document.querySelector('.mb-medium')
+            let mediumDisplayTitle = document.querySelector('.medium--title')
+            mediumDisplay.setAttribute('src', `Sample Photos/${photographer}/${nextMedium.mediaContent}`)
+            mediumDisplayTitle.textContent = `${nextMedium.mediaTitle}`;
+
+        } else if (currentMediumType !== nextMediumType) {
+            //todo if curr is jpg
+            if (currentMediumType === "jpg") {
+
+                const mediumToRemove = document.querySelector('.mb-medium')
+                const titleToRemove = document.querySelector('.medium--title')
+                center.removeChild(mediumToRemove)
+                center.removeChild(titleToRemove)
+
+                let resetIndex = 0; //& going back to the start of the slider so 0
+                nextMedium = mediaCaroussel[resetIndex]
+
+                const insertNextMedia = document.createElement('video')
+                insertNextMedia.setAttribute('controls', 'controls');
+                insertNextMedia.classList.add('mb-medium')
+                insertNextMedia.setAttribute('src', `Sample Photos/${photographer}/${nextMedium.mediaContent}`)
+                const nextMediaTitle = document.createElement('p')
+                nextMediaTitle.classList.add('medium--title')
+                nextMediaTitle.setAttribute('index', `${nextIndex}`) //& adding index again when medium is removed & recreated
+                nextMediaTitle.textContent = `${nextMedium.mediaTitle}`
+
+                center.appendChild(insertNextMedia)
+                center.appendChild(nextMediaTitle)
+
+            }  else if (currentMediumType === "mp4") { //todo if curr is mp4
+
+                const mediumToRemove = document.querySelector('.mb-medium')
+                const titleToRemove = document.querySelector('.medium--title')
+                center.removeChild(mediumToRemove)
+                center.removeChild(titleToRemove)
+
+                let resetIndex = 0; //& going back to the start of the slider so 0
+                nextMedium = mediaCaroussel[resetIndex]
+
+                const insertNextMedia = document.createElement('img')
+                insertNextMedia.classList.add('mb-medium')
+                insertNextMedia.setAttribute('src', `Sample Photos/${photographer}/${nextMedium.mediaContent}`)
+                const nextMediaTitle = document.createElement('p')
+                nextMediaTitle.classList.add('medium--title')
+                nextMediaTitle.setAttribute('index', `${nextIndex}`) //& adding index again when medium is removed & recreated
+                nextMediaTitle.textContent = `${nextMedium.mediaTitle}`
+
+                center.appendChild(insertNextMedia)
+                center.appendChild(nextMediaTitle)
+
+            }
+        }
+
+        return
+    }
+
+    //* Handling sliding in normal order
     //todo : compare types of current & next media
     if (currentMediumType === nextMediumType) {
         
@@ -180,6 +258,7 @@ function nextMediumSlide() {
             insertNextMedia.setAttribute('src', `Sample Photos/${photographer}/${nextMedium.mediaContent}`)
             const nextMediaTitle = document.createElement('p')
             nextMediaTitle.classList.add('medium--title')
+            previousMediaTitle.setAttribute('index', `${nextIndex}`) //& adding index again when medium is removed & recreated
             nextMediaTitle.textContent = `${nextMedium.mediaTitle}`
 
             center.appendChild(insertNextMedia)
@@ -194,6 +273,7 @@ function nextMediumSlide() {
             insertNextMedia.setAttribute('src', `Sample Photos/${photographer}/${nextMedium.mediaContent}`)
             const nextMediaTitle = document.createElement('p')
             nextMediaTitle.classList.add('medium--title')
+            previousMediaTitle.setAttribute('index', `${nextIndex}`) //& adding index again when medium is removed & recreated
             nextMediaTitle.textContent = `${nextMedium.mediaTitle}`
 
             center.appendChild(insertNextMedia)
