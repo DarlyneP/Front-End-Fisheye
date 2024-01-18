@@ -40,9 +40,10 @@ function fillPage(photographer, media) {
     let mediaCaroussel = [];
     let carousselIndex = 0;
     for (const medium of media) {
-        const { id, photographerId, mediumType, title, likes, date, price } = medium; //factory pattern
+        const { id, photographerId, mediumType, title, likes, date, price } = medium; //& factory pattern
         //* summing up likes of each media to show total of likes
-        likesCount += medium.likes;
+        //likesCount += medium.likes;
+        likesCount += likes;
 
         const mediaContent = document.createElement('div');
         mediaContent.classList.add('media--content')

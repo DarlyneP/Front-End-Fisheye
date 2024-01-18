@@ -1,4 +1,4 @@
-
+import { accessibleLightbox } from "./accessibility.js";
 
 function openFocus(event) {
     let targetTitle = "";
@@ -274,6 +274,8 @@ function openFocus(event) {
     mediaBox.appendChild(leftSide)
     mediaBox.appendChild(center)
     mediaBox.appendChild(rightSide)
+
+    accessibleLightbox()
 }
 
 function setLightboxFeature() {
