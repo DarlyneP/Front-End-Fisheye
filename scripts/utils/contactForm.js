@@ -47,4 +47,5 @@ function validateContactForm (event) {
     //? is checking validity of inputs mandatory fot this stage of developpment?
     const mail = new ContactForm(inputs[0].value, inputs[1].value, inputs[2].value, message.value)
     console.log(mail)
+    closeModal()
 }

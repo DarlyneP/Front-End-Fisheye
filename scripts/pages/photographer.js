@@ -67,8 +67,9 @@ function fillPage(photographer, media) {
             //localStorage.mediaCaroussel.push(medium.video)
         }
         img.setAttribute('title', `${medium.title}`)
+        img.setAttribute('tabindex', `0`)
         img.classList.add('media--content__medium')
-        img.addEventListener("click", openFocus)
+        //img.addEventListener("click", openFocus) //! moved to lightbox.js
         img.setAttribute('index', `${carousselIndex}`)
         carousselIndex += 1;
 
@@ -130,113 +131,7 @@ function fillPage(photographer, media) {
     }*/
 }
 
-function openFocus(event) {
-    console.log(event.currentTarget.src)
-    console.log(event.currentTarget.attributes)
-    console.log(event.currentTarget.attributes.src)
-    //console.log(event.currentTarget.attributes.src.split("/")[2])
-    console.log(event.currentTarget)
-
-    //const src = event.currentTarget.attributes.src.nodeValue
-    const targetTitle = event.currentTarget.attributes.title.textContent
-    const src = event.currentTarget.attributes.src.textContent //! same as above
-    const targetMedium = src.split("/")[2]
-    let currentIndex = event.currentTarget.attributes.index.value * 1
-
-    console.log(src)
-    console.log(targetMedium)
-    console.log('caroussel index : ', currentIndex)
-
-    let photographer = localStorage.currentPhotographerName
-
-    //* creating modal for mediabox
-    const mbModal = document.createElement('div')
-    mbModal.classList.add('mb-modal')
-    document.querySelector('body').appendChild(mbModal)
-
-    //* creating mediabox
-    const mediaBox = document.createElement('div')
-    mediaBox.classList.add('mediabox')
-    mbModal.appendChild(mediaBox)
-
-    const leftSide = document.createElement('div')
-    leftSide.classList.add('leftside')
-    const leftArrow = document.createElement('img')
-    leftArrow.setAttribute('src', `assets/icons/expand_more-24px 4.svg`);
-    leftArrow.classList.add('leftarrow')
-    leftArrow.addEventListener("click", /* previousMedia */ (event) => {
-        let mediaCaroussel = JSON.parse(localStorage.mediaCaroussel)
-        let previousMedium;
-        if (currentIndex === 0) {
-
-            previousMedium = mediaCaroussel[mediaCaroussel.length - 1]
-            let mediumDisplay = document.querySelector('.mb-medium')
-            let mediumDisplayTitle = document.querySelector('.medium--title')
-            mediumDisplay.setAttribute('src', `Sample Photos/${photographer}/${previousMedium.mediaContent}`)
-            mediumDisplayTitle.textContent = `${previousMedium.mediaTitle}`;
-
-        } else {
-
-            const previousIndex = currentIndex -= 1
-            previousMedium = mediaCaroussel[previousIndex]
-            let mediumDisplay = document.querySelector('.mb-medium')
-            let mediumDisplayTitle = document.querySelector('.medium--title')
-            mediumDisplay.setAttribute('src', `Sample Photos/${photographer}/${previousMedium.mediaContent}`)
-            mediumDisplayTitle.textContent = `${previousMedium.mediaTitle}`;
-
-        }
-    })
-    leftSide.appendChild(leftArrow)
-
-    const center = document.createElement('div')
-    center.classList.add('media-display')
-    let medium;
-    if (targetMedium.includes('jpg')) {
-        medium = document.createElement('img')
-        //medium.setAttribute('src', `Sample Photos/${photographer.name.split(' ')[0]}/${targetMedium}`);
-    } else if (targetMedium.includes('mp4')) {
-        medium = document.createElement('video')
-        //medium.setAttribute('src', `Sample Photos/${photographer.name.split(' ')[0]}/${targetMedium}`);
-        medium.setAttribute('controls', 'controls');
-    }
-    medium.setAttribute('src', `Sample Photos/${photographer}/${targetMedium}`);
-    medium.setAttribute('index', `${currentIndex}`) //& récupération & mise en place de l'index pour le caroussel
-    medium.classList.add('mb-medium')
-    const title = document.createElement('p')
-    title.classList.add('medium--title')
-    title.textContent = `${targetTitle}`;
-
-    center.appendChild(medium)
-    center.appendChild(title)
-
-    const rightSide = document.createElement('div')
-    rightSide.classList.add('rightside')
-    const close = document.createElement('img')
-    close.setAttribute("src", `assets/icons/close-24px 1.svg`)
-    close.classList.add('close')
-    close.addEventListener("click", () => {
-        mbModal.style.display = "none"
-        document.querySelector('body').removeChild(mbModal)
-    })
-    const rightArrow = document.createElement('img')
-    rightArrow.setAttribute('src', `assets/icons/expand_more-24px 5.svg`);
-    rightArrow.classList.add('rightarrow')
-    rightArrow.addEventListener("click", /* nextMedia */ (event) => {
-        let mediaCaroussel = JSON.parse(localStorage.mediaCaroussel)
-        const nextIndex = currentIndex += 1
-        const nextMedium = mediaCaroussel[nextIndex]
-        let mediumDisplay = document.querySelector('.mb-medium')
-        let mediumDisplayTitle = document.querySelector('.medium--title')
-        mediumDisplay.setAttribute('src', `Sample Photos/${photographer}/${nextMedium.mediaContent}`)
-        mediumDisplayTitle.textContent = `${nextMedium.mediaTitle}`;
-    })
-    rightSide.appendChild(close)
-    rightSide.appendChild(rightArrow)
-
-    mediaBox.appendChild(leftSide)
-    mediaBox.appendChild(center)
-    mediaBox.appendChild(rightSide)
-}
+//! function openfocus moved to lightbox.js
 
 getPhotographer()
 
