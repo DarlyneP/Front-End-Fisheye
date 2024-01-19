@@ -51,7 +51,8 @@ function fillPage(photographer, media) {
         let img;
         let mediaItem = {
             mediaTitle: "",
-            mediaContent: ""
+            mediaContent: "",
+            mediaId: id
         }
         if (medium.image) {
             img = document.createElement('img')

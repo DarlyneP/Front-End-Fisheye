@@ -1,4 +1,6 @@
 import { accessibleLightbox } from "./accessibility.js";
+import { lightboxDescription } from "./accessibility/descriptions.js";
+import { lightboxDescViaSlider } from "./accessibility/descriptions.js";
 
 function openFocus(event) {
     let targetTitle = "";
@@ -61,6 +63,8 @@ function openFocus(event) {
             currentIndex = (mediaCaroussel.length - 1) * 1
             const previousMediumType = previousMedium.mediaContent.split('.')[1]
 
+            lightboxDescViaSlider() //~ Adding description
+
             if (currentMediumType === previousMediumType) {
 
                 let mediumDisplay = document.querySelector('.mb-medium')
@@ -87,6 +91,7 @@ function openFocus(event) {
                     previousMediaTitle.textContent = `${previousMedium.mediaTitle}`
 
                     center.appendChild(insertPreviousMedia)
+                    lightboxDescViaSlider() //~ Adding description
                     center.appendChild(previousMediaTitle)
 
                 }  else if (currentMediumType === "mp4") { //todo if curr is mp4
@@ -105,6 +110,7 @@ function openFocus(event) {
                     previousMediaTitle.textContent = `${previousMedium.mediaTitle}`
                     
                     center.appendChild(insertPreviousMedia)
+                    lightboxDescViaSlider() //~ Adding description
                     center.appendChild(previousMediaTitle)
         
                 }
@@ -130,6 +136,8 @@ function openFocus(event) {
                 mediumDisplay.setAttribute('src', `Sample Photos/${photographer}/${previousMedium.mediaContent}`)
                 mediumDisplayTitle.textContent = `${previousMedium.mediaTitle}`;
 
+                lightboxDescViaSlider() //~ Adding description
+
             } else if (currentMediumType !== previousMediumType) {
                 //todo if curr is jpg
                 if (currentMediumType === "jpg") {
@@ -149,6 +157,7 @@ function openFocus(event) {
                     previousMediaTitle.textContent = `${previousMedium.mediaTitle}`
 
                     center.appendChild(insertPreviousMedia)
+                    lightboxDescViaSlider() //~ Adding description
                     center.appendChild(previousMediaTitle)
 
                 }  else if (currentMediumType === "mp4") { //todo if curr is mp4
@@ -167,6 +176,7 @@ function openFocus(event) {
                     previousMediaTitle.textContent = `${previousMedium.mediaTitle}`
                     
                     center.appendChild(insertPreviousMedia)
+                    lightboxDescViaSlider() //~ Adding description
                     center.appendChild(previousMediaTitle)
         
                 }
@@ -211,7 +221,7 @@ function openFocus(event) {
     const rightArrow = document.createElement('img')
     rightArrow.setAttribute('src', `assets/icons/expand_more-24px 5.svg`);
     rightArrow.classList.add('rightarrow')
-    rightArrow.addEventListener("click", /* nextMedia */ () => {
+    rightArrow.addEventListener("click", /* nextMedia */ (event) => {
     let mediaCaroussel = JSON.parse(localStorage.mediaCaroussel)
     const currentMedium = mediaCaroussel[currentIndex];
     const currentMediumType = currentMedium.mediaContent.split('.')[1]
@@ -236,6 +246,8 @@ function openFocus(event) {
         mediumDisplay.setAttribute('index', `${nextIndex}`) //& adding index again when medium is removed & recreated
         mediumDisplayTitle.textContent = `${nextMedium.mediaTitle}`;
 
+        lightboxDescViaSlider() //~ Adding description
+
     } else if (currentMediumType !== nextMediumType) {
         //todo if curr is jpg
         if (currentMediumType === "jpg") {
@@ -255,6 +267,7 @@ function openFocus(event) {
             nextMediaTitle.textContent = `${nextMedium.mediaTitle}`
 
             center.appendChild(insertNextMedia)
+            lightboxDescViaSlider() //~ Adding description
             center.appendChild(nextMediaTitle)
 
         }  else if (currentMediumType === "mp4") { //todo if curr is mp4
@@ -273,6 +286,7 @@ function openFocus(event) {
             nextMediaTitle.textContent = `${nextMedium.mediaTitle}`
 
             center.appendChild(insertNextMedia)
+            lightboxDescViaSlider() //~ Adding description
             center.appendChild(nextMediaTitle)
 
         }
@@ -288,6 +302,7 @@ function openFocus(event) {
     mediaBox.appendChild(center)
     mediaBox.appendChild(rightSide)
 
+    lightboxDescription(event)
     accessibleLightbox()
 }
 

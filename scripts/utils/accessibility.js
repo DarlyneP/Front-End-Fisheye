@@ -1,3 +1,5 @@
+import { lightboxDescViaSlider } from "./accessibility/descriptions.js";
+
 // todo : slider navigation with keyboard
 function accessibleLightbox () {
     const lightbox = document.querySelector('.mediabox')
@@ -13,6 +15,7 @@ function accessibleLightbox () {
                         return
                     }
                     previousMediumSlide()
+                    lightboxDescViaSlider() //~ Adding description
                     count += 1
                 } 
             }
@@ -26,6 +29,7 @@ function accessibleLightbox () {
                         return
                     }
                     nextMediumSlide()
+                    lightboxDescViaSlider() //~ Adding description
                     count += 1
                 }  
             }
@@ -58,6 +62,8 @@ function previousMediumSlide() {
             mediumDisplay.setAttribute('src', `Sample Photos/${photographer}/${previousMedium.mediaContent}`)
             mediumDisplay.setAttribute('index', `${mediaCaroussel.length - 1}`) //& adding index again when medium is removed & recreated
             mediumDisplayTitle.textContent = `${previousMedium.mediaTitle}`;
+
+            
             
         } else if (currentMediumType !== previousMediumType) {
             //todo if curr is jpg
@@ -79,6 +85,7 @@ function previousMediumSlide() {
 
                 center.appendChild(insertPreviousMedia)
                 center.appendChild(previousMediaTitle)
+                
 
             }  else if (currentMediumType === "mp4") { //todo if curr is mp4
     
@@ -122,6 +129,8 @@ function previousMediumSlide() {
             mediumDisplay.setAttribute('index', `${previousIndex}`) //& adding index again when medium is removed & recreated
             mediumDisplayTitle.textContent = `${previousMedium.mediaTitle}`;
 
+            
+
         } else if (currentMediumType !== previousMediumType) {
             //todo if curr is jpg
             if (currentMediumType === "jpg") {
@@ -141,6 +150,7 @@ function previousMediumSlide() {
                 previousMediaTitle.textContent = `${previousMedium.mediaTitle}`
 
                 center.appendChild(insertPreviousMedia)
+                
                 center.appendChild(previousMediaTitle)
 
             }  else if (currentMediumType === "mp4") { //todo if curr is mp4
