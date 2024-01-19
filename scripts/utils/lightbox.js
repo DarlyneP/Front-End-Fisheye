@@ -229,70 +229,94 @@ function openFocus(event) {
     const currentMedium = mediaCaroussel[currentIndex];
     const currentMediumType = currentMedium.mediaContent.split('.')[1]
 
+    
     //const nextIndex = currentIndex += 1
-    const nextIndex = 1 * currentIndex + 1
-    currentIndex += 1
-
-    let nextMedium = mediaCaroussel[nextIndex]
-    const nextMediumType = nextMedium.mediaContent.split('.')[1]
+    let nextIndex;
+    let nextMedium;
+    let nextMediumType;
+    
     //todo in the future maybe : Handling going from last medium back to first medium
+    const carousselLimit = (mediaCaroussel.length - 1) * 1
+    if (currentIndex === carousselLimit) {
+        console.log("Limit is reached, resetting the slider");
 
+        nextIndex = 0
+        console.log("next index : ", nextIndex);
+        nextMedium = mediaCaroussel[nextIndex]
+        nextMediumType = nextMedium.mediaContent.split('.')[1]
 
+    } else {
+        console.log("Limit is not reached");
 
-    //* Handling sliding in normal order
-    //todo : compare types of current & next media
-    if (currentMediumType === nextMediumType) {
-        
-        let mediumDisplay = document.querySelector('.mb-medium')
-        let mediumDisplayTitle = document.querySelector('.medium--title')
-        mediumDisplay.setAttribute('src', `Sample Photos/${photographer}/${nextMedium.mediaContent}`)
-        mediumDisplay.setAttribute('index', `${nextIndex}`) //& adding index again when medium is removed & recreated
-        mediumDisplayTitle.textContent = `${nextMedium.mediaTitle}`;
+        nextIndex = 1 * currentIndex + 1
+        console.log("next index : ", nextIndex);
+        nextMedium = mediaCaroussel[nextIndex]
+        nextMediumType = nextMedium.mediaContent.split('.')[1]
 
-        lightboxDescViaSlider() //~ Adding description
-
-    } else if (currentMediumType !== nextMediumType) {
-        //todo if curr is jpg
-        if (currentMediumType === "jpg") {
-
-            const mediumToRemove = document.querySelector('.mb-medium')
-            const titleToRemove = document.querySelector('.medium--title')
-            center.removeChild(mediumToRemove)
-            center.removeChild(titleToRemove)
-
-            const insertNextMedia = document.createElement('video')
-            insertNextMedia.setAttribute('controls', 'controls');
-            insertNextMedia.classList.add('mb-medium')
-            insertNextMedia.setAttribute('src', `Sample Photos/${photographer}/${nextMedium.mediaContent}`)
-            insertNextMedia.setAttribute('index', `${nextIndex}`) //& adding index again when medium is removed & recreated
-            const nextMediaTitle = document.createElement('p')
-            nextMediaTitle.classList.add('medium--title')
-            nextMediaTitle.textContent = `${nextMedium.mediaTitle}`
-
-            center.appendChild(insertNextMedia)
+        currentIndex += 1
+        } // will maybe be remove to restore the other below
+    
+        //* Handling sliding in normal order
+        //todo : compare types of current & next media
+        if (currentMediumType === nextMediumType) {
+            
+            let mediumDisplay = document.querySelector('.mb-medium')
+            let mediumDisplayTitle = document.querySelector('.medium--title')
+            mediumDisplay.setAttribute('src', `Sample Photos/${photographer}/${nextMedium.mediaContent}`)
+            mediumDisplay.setAttribute('index', `${nextIndex}`) //& adding index again when medium is removed & recreated
+            mediumDisplayTitle.textContent = `${nextMedium.mediaTitle}`;
+    
             lightboxDescViaSlider() //~ Adding description
-            center.appendChild(nextMediaTitle)
-
-        }  else if (currentMediumType === "mp4") { //todo if curr is mp4
-
-            const mediumToRemove = document.querySelector('.mb-medium')
-            const titleToRemove = document.querySelector('.medium--title')
-            center.removeChild(mediumToRemove)
-            center.removeChild(titleToRemove)
-
-            const insertNextMedia = document.createElement('img')
-            insertNextMedia.classList.add('mb-medium')
-            insertNextMedia.setAttribute('src', `Sample Photos/${photographer}/${nextMedium.mediaContent}`)
-            insertNextMedia.setAttribute('index', `${nextIndex}`) //& adding index again when medium is removed & recreated
-            const nextMediaTitle = document.createElement('p')
-            nextMediaTitle.classList.add('medium--title')
-            nextMediaTitle.textContent = `${nextMedium.mediaTitle}`
-
-            center.appendChild(insertNextMedia)
-            lightboxDescViaSlider() //~ Adding description
-            center.appendChild(nextMediaTitle)
-
+    
+        } else if (currentMediumType !== nextMediumType) {
+            //todo if curr is jpg
+            if (currentMediumType === "jpg") {
+    
+                const mediumToRemove = document.querySelector('.mb-medium')
+                const titleToRemove = document.querySelector('.medium--title')
+                center.removeChild(mediumToRemove)
+                center.removeChild(titleToRemove)
+    
+                const insertNextMedia = document.createElement('video')
+                insertNextMedia.setAttribute('controls', 'controls');
+                insertNextMedia.classList.add('mb-medium')
+                insertNextMedia.setAttribute('src', `Sample Photos/${photographer}/${nextMedium.mediaContent}`)
+                insertNextMedia.setAttribute('index', `${nextIndex}`) //& adding index again when medium is removed & recreated
+                const nextMediaTitle = document.createElement('p')
+                nextMediaTitle.classList.add('medium--title')
+                nextMediaTitle.textContent = `${nextMedium.mediaTitle}`
+    
+                center.appendChild(insertNextMedia)
+                lightboxDescViaSlider() //~ Adding description
+                center.appendChild(nextMediaTitle)
+    
+            }  else if (currentMediumType === "mp4") { //todo if curr is mp4
+    
+                const mediumToRemove = document.querySelector('.mb-medium')
+                const titleToRemove = document.querySelector('.medium--title')
+                center.removeChild(mediumToRemove)
+                center.removeChild(titleToRemove)
+    
+                const insertNextMedia = document.createElement('img')
+                insertNextMedia.classList.add('mb-medium')
+                insertNextMedia.setAttribute('src', `Sample Photos/${photographer}/${nextMedium.mediaContent}`)
+                insertNextMedia.setAttribute('index', `${nextIndex}`) //& adding index again when medium is removed & recreated
+                const nextMediaTitle = document.createElement('p')
+                nextMediaTitle.classList.add('medium--title')
+                nextMediaTitle.textContent = `${nextMedium.mediaTitle}`
+    
+                center.appendChild(insertNextMedia)
+                lightboxDescViaSlider() //~ Adding description
+                center.appendChild(nextMediaTitle)
+    
+            }
+        //~ Reset of the currentIndex so the slider is not blocked after resetting
+        if (currentIndex === carousselLimit) {
+            currentIndex = 0
         }
+    /*}*/
+    
+
     }
 
         //currentIndex = "";
