@@ -7,17 +7,11 @@ async function allDescriptions(){
     const result = await descriptionsData.json()
     const descriptions = result.descriptions
 
-    //const pageDescriptions = [] // creating an array to store the descriptions for the media 
     const pageDescriptions = descriptions.filter(element => element.photographerId === photographerId) //~ creating an array to store the descriptions for the media 
-    /*for (let index = 0; index < mediaCaroussel.length; index++) {
-        const description = result.find(element => element.id === photographerId);
-        pageDescriptions.push(description)
-    }*/
-    //let mediaCaroussel = localStorage.mediaCaroussel;
 
     let allMedia = document.querySelectorAll('.media--content')
     for (let index = 0; index < allMedia.length; index++) {
-        //const element = array[index];
+        
         allMedia[index].setAttribute('alt', `${pageDescriptions[index].text}`)
     }
 }

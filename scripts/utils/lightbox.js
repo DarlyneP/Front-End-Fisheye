@@ -19,6 +19,9 @@ function openFocus(event) {
         //const src = event.currentTarget.attributes.src.nodeValue
         //const targetTitle = event.currentTarget.attributes.title.textContent //! no longer works for same reason as explained below
         //const src = event.currentTarget.attributes.src.textContent //! same as above //! no longer works for an unknown reason, the browser processes the event differently now
+
+        //^ SOLVED : "currentTarget" no longer works because openFocus is also opened secondarily by calls, not just event listeners. In secondary executions (calls), srcElement works instead.
+
         targetTitle = event.srcElement.attributes.title.value
         src = event.srcElement.attributes.src.textContent
         targetMedium = src.split("/")[2]
@@ -320,5 +323,5 @@ function setLightboxFeature() {
     }   
 }
 
-//setLightboxFeature()
+//setLightboxFeature() //~ commented because the page needs to be loaded first before this function executes itself
 window.addEventListener("load", setLightboxFeature) //? This function is set on load so that it launches only after the page is loaded, else it cannot find the elements to add events listeners to
