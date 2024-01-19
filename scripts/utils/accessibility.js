@@ -190,14 +190,30 @@ function nextMediumSlide() {
     const currentMediumType = currentMedium.mediaContent.split('.')[1]
 
     //const nextIndex = currentIndex += 1
-    const nextIndex = currentIndex + 1
-    currentIndex += 1
-
-    let nextMedium = mediaCaroussel[nextIndex]
-    const nextMediumType = nextMedium.mediaContent.split('.')[1]
+    let nextIndex;
+    let nextMedium;
+    let nextMediumType;
 
     //todo in the future maybe : Handling going from last medium back to first medium
+    const carousselLimit = (mediaCaroussel.length - 1) * 1
+    if (currentIndex === carousselLimit) {
+        console.log("Limit is reached, resetting the slider");
 
+        nextIndex = 0
+        console.log("next index : ", nextIndex);
+        nextMedium = mediaCaroussel[nextIndex]
+        nextMediumType = nextMedium.mediaContent.split('.')[1]
+
+    } else {
+        console.log("Limit is not reached");
+
+        nextIndex = 1 * currentIndex + 1
+        console.log("next index : ", nextIndex);
+        nextMedium = mediaCaroussel[nextIndex]
+        nextMediumType = nextMedium.mediaContent.split('.')[1]
+
+        currentIndex += 1
+        }
 
     //* Handling sliding in normal order
     //todo : compare types of current & next media
@@ -248,6 +264,9 @@ function nextMediumSlide() {
             center.appendChild(insertNextMedia)
             center.appendChild(nextMediaTitle)
 
+        }
+        if (currentIndex === carousselLimit) {
+            currentIndex = 0
         }
         return
     }
