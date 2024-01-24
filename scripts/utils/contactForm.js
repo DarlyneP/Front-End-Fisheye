@@ -1,26 +1,9 @@
-/*function displayModal() {
-    const contactModalBg = document.createElement('div')
-    contactModalBg.classList.add('contact-modalbg')
-    const modal = document.getElementById("contact_modal");
-    contactModalBg.appendChild(modal)
-    document.querySelector('body').appendChild(contactModalBg)
-	// modal.style.display = "block";
-	modal.style.display = "flex";
-    
-    const name = modal.getElementsByClassName('name')[0]
-    const photographerName = document.querySelector('.profile--name').textContent
-    // name.textContent = `${localStorage.photographer.name}`;
-    name.textContent = `${photographerName}`;
-    const validateBtn = document.querySelector('.contact_button_send')
-    validateBtn.addEventListener("click", validateContactForm)
-}*/
-
 function displayModal() {
     const contactModalBg = document.querySelector('#contact_modal')
 
     //~ Applying necessary styles for the box to move on top of the screen & be visible
     contactModalBg.style.display = "flex"
-    contactModalBg.style.backgroundColor = "white"
+    contactModalBg.style.backgroundColor = "#ffffffb0"
     contactModalBg.style.position = "fixed"
     contactModalBg.style.top = "0" 
 
@@ -29,9 +12,13 @@ function displayModal() {
     const name = modal.getElementsByClassName('name')[0]
     const photographerName = document.querySelector('.profile--name').textContent
     name.textContent = `${photographerName}`;
-    const validateBtn = document.querySelector('.contact_button_send')
-    //validateBtn.addEventListener("click", validateContactForm)
-    validateBtn.addEventListener("submit", validateContactForm)
+    const validateBtn = contactModalBg.querySelector('.contact_button_send')
+    validateBtn.addEventListener("click", validateContactForm)
+
+    //~ Trying to handle preventDefault not working
+    const form = contactModalBg.querySelector('form')
+    form[4].formAction = ""; //! SUCCESSFULLY PREVENTS REFRESH & LETS FORM CONTENT LOAD IN THE CONSOLE.
+    //validateBtn.addEventListener("submit", validateContactForm)
 
 
 }
@@ -62,9 +49,9 @@ class ContactForm {
 }
 
 function validateContactForm (event) {
-    //event.preventDefault()
+    event.preventDefault() //! Is not working for unknown reason, handled with " formAction " property in displayModal()
     console.log(event);
-    event.target.preventDefault()
+    //event.target.preventDefault()
     const contactForm = document.querySelector('.modal form div')
     const inputs = contactForm.querySelectorAll('input')
     const message = contactForm.querySelector('#message')

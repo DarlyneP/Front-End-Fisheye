@@ -60,7 +60,7 @@ function photographerTemplate(data) {
         circleWrapper.classList.add('wrapper--circle')
 
         //imgWrapper.appendChild(img);
-        imgWrapper.appendChild(bgCover);
+        //imgWrapper.appendChild(bgCover);
         imgWrapper.appendChild(circleWrapper);
 
         //& creating what goes inside circleWrapper (the second layer of the profile picture (profilepic pp-top))

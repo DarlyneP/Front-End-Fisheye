@@ -47,6 +47,8 @@ function openFocus(event) {
     //* creating mediabox
     const mediaBox = document.createElement('div')
     mediaBox.classList.add('mediabox')
+    mediaBox.setAttribute('aria-label', 'image close-up view') //& accessibility : description of lightbox functionality
+    mediaBox.setAttribute('aria-modal', 'true') //& accessibility : informs user lightbox is modal & interaction is limited to it until dismissed
     mbModal.appendChild(mediaBox)
 
     const leftSide = document.createElement('div')

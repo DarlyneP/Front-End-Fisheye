@@ -14,6 +14,7 @@ function showCustomBox (event) {
         // Todo : create custion display
         const customOptionBox = document.createElement('div');
         customOptionBox.classList.add('custom-optionbox');
+        customOptionBox.setAttribute('aria-multiselectable', 'true') //& acessibility : informing user this is an element with multiple choices
         let rect = select.getBoundingClientRect();
         console.log(rect.top, rect.right, rect.bottom, rect.left);
         /*const boxHeight = select.offsetHeight

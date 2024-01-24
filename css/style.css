@@ -90,6 +90,7 @@ article .profilepic:nth-of-type(1), article .profilepic:nth-of-type(2) {
     width: 177%;
     margin-left: -38%;
     margin-top: -36%;
+    object-fit: cover;
 }
 
 article .profilepic:nth-of-type(3), article .profilepic:nth-of-type(4) {
@@ -105,7 +106,7 @@ article .profilepic:nth-of-type(3), article .profilepic:nth-of-type(4) {
     z-index: 10;
     width: 100%;
     height: 100%;
-    background-color: azure;
+    /* background-color: azure; */ /*! used only for color checking*/
     border-radius: 50%;
     overflow: hidden;
     display: inline-block;

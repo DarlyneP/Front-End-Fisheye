@@ -68,7 +68,7 @@ function fillPage(photographer, media) {
             //mediaCaroussel.push(medium.video)
             //localStorage.mediaCaroussel.push(medium.video)
         }
-        img.setAttribute('title', `${medium.title}`)
+        img.setAttribute('title', `${title}`)
         img.setAttribute('tabindex', `0`)
         img.classList.add('media--content__medium')
         //img.addEventListener("click", openFocus) //! moved to lightbox.js
@@ -76,16 +76,17 @@ function fillPage(photographer, media) {
         carousselIndex += 1;
 
         const mediumTitle = document.createElement('h3')
-        mediumTitle.textContent = medium.title;
-        mediaItem.mediaTitle = medium.title
+        mediumTitle.textContent = title;
+        mediaItem.mediaTitle = title
 
         mediaCaroussel.push(mediaItem)
 
         const details = document.createElement('span');
         const likesAmount = document.createElement('p');
-        likesAmount.textContent = `${medium.likes}`
+        likesAmount.textContent = `${likes}`
         const like = document.createElement('img');
         like.setAttribute('src', 'assets/icons/favorite-24px 1.svg')
+        like.setAttribute('alt', 'likes')
         like.setAttribute('liked', 'false')
         like.classList.add('like')
         like.addEventListener("click", /*toggleLike*/ (event) => {
