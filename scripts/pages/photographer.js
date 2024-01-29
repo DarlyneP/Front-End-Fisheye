@@ -34,9 +34,16 @@ function fillPage(photographer, media) {
     const profilePicture = document.querySelector('.photographer--picture img')
     profilePicture.setAttribute("src", `assets/photographers/${photographer.portrait}`)
     
-    let likesCount = 0;
+    /*
+    //& Change title of Contact Me button
+    const contactBtn = document.querySelector('.contact_button')
+    contactBtn.setAttribute("title", `Contact me ${photographer.name}`)
+    */
     
     //& Fill media section
+
+    let likesCount = 0;
+
     let mediaCaroussel = [];
     let carousselIndex = 0;
     for (const medium of media) {
@@ -58,15 +65,11 @@ function fillPage(photographer, media) {
             img = document.createElement('img')
             img.setAttribute('src', `Sample Photos/${photographer.name.split(' ')[0]}/${medium.image}`);
             mediaItem.mediaContent = medium.image
-            //mediaCaroussel.push(medium.image)
-            //localStorage.mediaCaroussel.push(medium.image)
         } else if (medium.video) {
             img = document.createElement('video')
             img.setAttribute('src', `Sample Photos/${photographer.name.split(' ')[0]}/${medium.video}`);
             //img.setAttribute('controls', 'controls'); //maybe hide controls, overlay a play icon & show controls in modal play window.
             mediaItem.mediaContent = medium.video
-            //mediaCaroussel.push(medium.video)
-            //localStorage.mediaCaroussel.push(medium.video)
         }
         img.setAttribute('title', `${title}`)
         img.setAttribute('tabindex', `0`)
@@ -126,12 +129,6 @@ function fillPage(photographer, media) {
     price.textContent = `${photographer.price}€ / jour`;
 
     localStorage.setItem("mediaCaroussel", JSON.stringify(mediaCaroussel)); //! turning array into string as localStorage stores strings
-    //localStorage.setItem("mediaCaroussel", mediaCaroussel);
-    //localStorage.setItem("mediaCaroussel", mediaCaroussel.stringify());
-    /*for (const medium of mediaCaroussel) {
-        medium.addEventListener("click", openFocus)
-        //medium.addEventListener("")
-    }*/
 }
 
 //! function openfocus moved to lightbox.js

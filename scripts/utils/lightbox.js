@@ -56,7 +56,7 @@ function openFocus(event) {
     const leftArrow = document.createElement('img')
     leftArrow.setAttribute('src', `assets/icons/expand_more-24px 4.svg`);
     leftArrow.setAttribute('aria-label', 'Previous image');
-    close.setAttribute("aria-keyshortcuts", 'ArrowLeft')
+    leftArrow.setAttribute("aria-keyshortcuts", 'ArrowLeft')
     leftArrow.classList.add('leftarrow')
     leftArrow.addEventListener("click", /* previousMedia */ (event) => {
         let mediaCaroussel = JSON.parse(localStorage.mediaCaroussel)
@@ -222,7 +222,7 @@ function openFocus(event) {
     close.setAttribute("src", `assets/icons/close-24px 1.svg`)
     close.setAttribute("aria-label", 'Close dialog') //& accessibility : closing mediabox notification
     close.setAttribute("tabindex", '0') 
-    close.setAttribute("aria-keyshortcuts", 'Escape')
+    close.setAttribute("aria-keyshortcuts", 'Escape') //& accessibility : letting user know there is a keyboard shortcut to close the lightbox
     close.classList.add('close')
 
     close.addEventListener("click", /* closeLightbox */() => {

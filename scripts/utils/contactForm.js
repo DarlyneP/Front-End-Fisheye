@@ -14,6 +14,8 @@ function displayModal() {
     name.textContent = `${photographerName}`;
     const validateBtn = contactModalBg.querySelector('.contact_button_send')
     validateBtn.addEventListener("click", validateContactForm)
+    //& Accessibility
+    contactModalBg.setAttribute("aria-labelledby", 'header--text')
 
     //~ Trying to handle preventDefault not working
     const form = contactModalBg.querySelector('form')
