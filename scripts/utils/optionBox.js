@@ -1,6 +1,7 @@
 import { fillPage } from "../pages/photographer.js";
 //* Create custom option box
-const select = document.querySelector('select');
+const select = document.querySelector('.select');
+// const select = document.querySelector('select');
 //const select = document.querySelector('selectmenu');
 function showCustomBox (event) {
         
@@ -15,6 +16,8 @@ function showCustomBox (event) {
         const customOptionBox = document.createElement('div');
         customOptionBox.classList.add('custom-optionbox');
         customOptionBox.setAttribute('aria-multiselectable', 'true') //& acessibility : informing user this is an element with multiple choices
+        customOptionBox.setAttribute('role', 'listbox') //& acessibility : informing user this is an element with multiple choices
+        customOptionBox.setAttribute('aria-activedescendant', 'listbox') //& acessibility : informing user this is an element with multiple choices
         let rect = select.getBoundingClientRect();
         console.log(rect.top, rect.right, rect.bottom, rect.left);
         /*const boxHeight = select.offsetHeight
@@ -53,6 +56,8 @@ function showCustomBox (event) {
         customOptionBox.clientY = boxHeight
         customOptionBox.style.marginTop = `-${boxHeightCorrection}px`;
         customOptionBox.style.marginLeft = `${boxPositionCorrection - select.style.marginLeft - 23}px`;
+
+        select.setAttribute('aria-expanded', 'true') //& accessibility
         /*customOptionBox.clientX = boxPosition + boxPositionCorrection
         customOptionBox.clientY = boxHeight - boxHeightCorrection*/
 
@@ -67,6 +72,7 @@ select.addEventListener("keydown", (event) => {
 
 function sortMedia(event) {
     closeCustomOptionBox()
+    select.setAttribute('aria-expanded', 'false') //& accessibility
     let sortMethod = "";
     if (event.currentTarget) {
         sortMethod = event.currentTarget.attributes.name.value //& click event
@@ -85,19 +91,22 @@ function sortMedia(event) {
         case "Popularité":
             console.log('sortMethod : ', sortMethod);
             //document.querySelector('select')[0].outerHTML = "";
-            document.querySelector('select').options[0].innerText = `${sortMethod}`;
+            // document.querySelector('select').options[0].innerText = `${sortMethod}`;
+            document.querySelector('.select').innerText = `${sortMethod}`;
             sortingCall(sortMethod)
             break;
         case "Date":
             console.log('sortMethod : ', sortMethod);
             //document.querySelector('select')[0].outerHTML = "";
-            document.querySelector('select').options[0].innerText = `${sortMethod}`;
+            // document.querySelector('select').options[0].innerText = `${sortMethod}`;
+            document.querySelector('.select').innerText = `${sortMethod}`;
             sortingCall(sortMethod)
             break;
         case "Titre":
             console.log('sortMethod : ', sortMethod);
             //document.querySelector('select')[0].outerHTML = "";
-            document.querySelector('select').options[0].innerText = `${sortMethod}`;
+            // document.querySelector('select').options[0].innerText = `${sortMethod}`;
+            document.querySelector('.select').innerText = `${sortMethod}`;
             sortingCall(sortMethod)
             break;
         default:

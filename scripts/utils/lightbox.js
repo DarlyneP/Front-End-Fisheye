@@ -55,6 +55,8 @@ function openFocus(event) {
     leftSide.classList.add('leftside')
     const leftArrow = document.createElement('img')
     leftArrow.setAttribute('src', `assets/icons/expand_more-24px 4.svg`);
+    leftArrow.setAttribute('aria-label', 'Previous image');
+    close.setAttribute("aria-keyshortcuts", 'ArrowLeft')
     leftArrow.classList.add('leftarrow')
     leftArrow.addEventListener("click", /* previousMedia */ (event) => {
         let mediaCaroussel = JSON.parse(localStorage.mediaCaroussel)
@@ -218,13 +220,26 @@ function openFocus(event) {
     rightSide.classList.add('rightside')
     const close = document.createElement('img')
     close.setAttribute("src", `assets/icons/close-24px 1.svg`)
+    close.setAttribute("aria-label", 'Close dialog') //& accessibility : closing mediabox notification
+    close.setAttribute("tabindex", '0') 
+    close.setAttribute("aria-keyshortcuts", 'Escape')
     close.classList.add('close')
-    close.addEventListener("click", () => {
+
+    close.addEventListener("click", /* closeLightbox */() => {
         mbModal.style.display = "none"
         document.querySelector('body').removeChild(mbModal)
     })
+    close.addEventListener("keydown", /* closeLightboxAcc */ (event) => { //& accessibility : closing mediabox
+        if (event.key === "Enter") {
+            mbModal.style.display = "none"
+            document.querySelector('body').removeChild(mbModal)
+        }
+    })
+
     const rightArrow = document.createElement('img')
     rightArrow.setAttribute('src', `assets/icons/expand_more-24px 5.svg`);
+    leftArrow.setAttribute('aria-label', 'Next image');
+    close.setAttribute("aria-keyshortcuts", 'ArrowRight')
     rightArrow.classList.add('rightarrow')
     rightArrow.addEventListener("click", /* nextMedia */ (event) => {
     let mediaCaroussel = JSON.parse(localStorage.mediaCaroussel)

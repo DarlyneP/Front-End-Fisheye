@@ -3,39 +3,25 @@ import { lightboxDescViaSlider } from "./accessibility/descriptions.js";
 // todo : slider navigation with keyboard
 function accessibleLightbox () {
     const lightbox = document.querySelector('.mediabox')
-    let count = 0 //! Prevents the function from repeating itself out of nowhere & skipping content but a double press down is necessary every 2 medium, will try to change this later
     if (lightbox) { 
 
         window.addEventListener("keydown", (event) => {
             console.log(event);
             if (lightbox) { //? checking if lightbox exists so that event only activates when lightbox is on
                 if (event.key === "ArrowLeft") {
-                    if (count > 0) {
-                        count = 0
-                        return
-                    }
                     previousMediumSlide()
                     lightboxDescViaSlider() //~ Adding description
-                    count += 1
-                } 
-            }
-        })
-        window.addEventListener("keydown", (event) => {
-            console.log(event);
-            if (lightbox) {
-                if (event.key === "ArrowRight") {
-                    if (count > 1) {
-                        count = 0
-                        return
-                    }
+                } else if (event.key === "ArrowRight") {
                     nextMediumSlide()
                     lightboxDescViaSlider() //~ Adding description
-                    count += 1
-                }  
+                }  else if (event.key === "Escape") {
+                    const lbModal = document.querySelector('.mb-modal')
+                    lbModal.style.display = "none"
+                    document.querySelector('body').removeChild(lbModal)
+                }
             }
         })
     }
-    return //! Here to prevent the function from repeating itself alone out of nowhere, doesn't work, will use a count instead
 }
 
 function previousMediumSlide() {
@@ -272,6 +258,10 @@ function nextMediumSlide() {
     }
 
     return //! Here to prevent the function from lauching itself again & entering in another for an unknown reason, which makes the slider skip a picture.
+}
+
+function closeLightboxAcc(event) {
+    
 }
 
 export { accessibleLightbox };

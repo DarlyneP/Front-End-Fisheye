@@ -156,7 +156,7 @@ form input {
     margin: 10px 0;
 }
 
-select, selectmenu {
+select, selectmenu, .select {
     padding: 20px 15px;
     background-color: #901C1C;
     border: none;
@@ -164,6 +164,10 @@ select, selectmenu {
     color: white;
     font-weight: 600;
     margin-left: 20px;
+}
+
+.select:hover {
+    cursor: pointer;
 }
 
 .custom-optionbox {
@@ -241,7 +245,7 @@ select, selectmenu {
     height: 24px;
 }
 
-.like:hover {
+.like:hover, leftarrow:hover, rightarrow:hover, close:hover {
     cursor: pointer;
 }
 
@@ -306,10 +310,6 @@ select, selectmenu {
     /* margin-bottom: -40px; */
     margin-bottom: 70px;
 }
-
-.leftarrow:hover, .rightarrow:hover {
-    cursor: pointer;
-} 
 
 .close {
     width: 42px;
