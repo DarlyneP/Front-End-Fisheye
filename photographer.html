@@ -26,27 +26,27 @@
         </section>
       </div>
       <div class="photographer--media">
-        <form action="" method="get" class="sort">
-          <label for="trier par">Trier par</label>
-          <button class="select" tabindex="0" role="button" aria-haspopup="listbox" aria-expanded="false">Popularité <span><img src="assets/icons/reduce.svg" alt=""></span></button>
+        <form method="get" class="sort">
+          <label for="orderby">Trier par</label>
+          <button class="select" id="orderby" aria-labelledby="orderby" tabindex="0" aria-haspopup="listbox" aria-expanded="false">Popularité <span><img src="assets/icons/reduce.svg" alt=""></span></button>
           <!-- <select value="Trier par">
             <option value="popularite">Popularité</option> -->
             <!-- <option value="date">Date</option>
-            <option value="titre">Titre</option> -->
-          </select>
+            <option value="titre">Titre</option>
+          </select> -->
         </form>
         <section class="media">
           
         </section>
       </div>
       <div class="likes-and-price">
-        <span>
+        <div>
           <p class="likes-total"></p>
-          <img src="assets/icons/favorite-24px 1 black.svg" alt="" class="like">
-        </span>
-        <span>
+          <img src="assets/icons/favorite-24px_1_black.svg" alt="total amount of likes" class="like">
+        </div>
+        <div>
           <p class="price"></p>
-        </span>
+        </div>
       </div>
     </main>
     <div id="contact_modal">
@@ -56,16 +56,16 @@
             <h2>Contactez-moi</h2>
             <p class="name"></p>
           </div>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <img src="assets/icons/close.svg" onclick="closeModal()" alt="Close contact form" />
         </header>
 				<form>
 					<div>
-						<label for="firstname">Prénom</label>
-						<input type="text" name="firstname" id="" aria-labelledby="firstname">
+						<label for="firstname" id="firstname-label">Prénom</label>
+						<input type="text" name="firstname" id="firstname" aria-labelledby="firstname-label">
             <label for="lastname">Nom</label>
-						<input type="text" name="lastname" id="" aria-labelledby="lastname">
-            <label for="email">Email</label>
-						<input type="email" name="email" id="" aria-labelledby="email">
+						<input type="text" name="lastname" id="lastname" aria-labelledby="lastname">
+            <label for="email" id="email-label">Email</label>
+						<input type="email" name="email" id="email" aria-labelledby="email-label">
             <label for="message">Votre message</label>
 						<!-- <textarea name="message" id="message" rows="10" cols="86"></textarea> -->
 						<textarea name="message" id="message" rows="12" cols="73" aria-labelledby="message"></textarea>

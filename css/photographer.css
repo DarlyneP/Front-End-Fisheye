@@ -298,7 +298,7 @@ select, selectmenu, .select {
     align-items: center;
 }
 
-.likes-and-price span:nth-of-type(1) {
+.likes-and-price div:nth-of-type(1) {
     display: flex;
     align-items: center;
 }
