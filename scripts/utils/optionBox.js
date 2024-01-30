@@ -51,6 +51,13 @@ function showCustomBox (event) {
             customOptionBox.appendChild(cbOption)
         }
 
+        // Todo : add arrow in custom box
+        const span = document.createElement('span')
+        const reduce = document.createElement('img')
+        reduce.setAttribute('src', '../../assets/icons/reduce.svg')
+        span.appendChild(reduce)
+        customOptionBox.appendChild(span)
+
         // Todo : fix position of custombox
         customOptionBox.clientX = boxPosition
         customOptionBox.clientY = boxHeight
@@ -92,21 +99,24 @@ function sortMedia(event) {
             console.log('sortMethod : ', sortMethod);
             //document.querySelector('select')[0].outerHTML = "";
             // document.querySelector('select').options[0].innerText = `${sortMethod}`;
-            document.querySelector('.select').innerText = `${sortMethod}`;
+            // document.querySelector('.select').innerText = `${sortMethod}`; //& this removes the arrow so innerText will be used instead
+            document.querySelector('.select').innerHTML = `${sortMethod} <span><img src=\"assets/icons/reduce.svg\" alt=\"\"></span>`;
             sortingCall(sortMethod)
             break;
         case "Date":
             console.log('sortMethod : ', sortMethod);
             //document.querySelector('select')[0].outerHTML = "";
             // document.querySelector('select').options[0].innerText = `${sortMethod}`;
-            document.querySelector('.select').innerText = `${sortMethod}`;
+            // document.querySelector('.select').innerText = `${sortMethod}`; //& this removes the arrow so innerText will be used instead
+            document.querySelector('.select').innerHTML = `${sortMethod} <span><img src=\"assets/icons/reduce.svg\" alt=\"\"></span>`;
             sortingCall(sortMethod)
             break;
         case "Titre":
             console.log('sortMethod : ', sortMethod);
             //document.querySelector('select')[0].outerHTML = "";
             // document.querySelector('select').options[0].innerText = `${sortMethod}`;
-            document.querySelector('.select').innerText = `${sortMethod}`;
+            // document.querySelector('.select').innerText = `${sortMethod}`; //& this removes the arrow so innerText will be used instead
+            document.querySelector('.select').innerHTML = `${sortMethod} <span><img src=\"assets/icons/reduce.svg\" alt=\"\"></span>`;
             sortingCall(sortMethod)
             break;
         default:

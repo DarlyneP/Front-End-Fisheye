@@ -21,6 +21,8 @@ function accessibleLightbox () {
                 }
             }
         })
+        
+        // lightbox.focus() //& accessibility : places tabindex focus on mediabox, is useful to start videos directly by simply pressing the spacebar
     }
 }
 

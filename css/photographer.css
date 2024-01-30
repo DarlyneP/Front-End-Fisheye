@@ -166,8 +166,43 @@ select, selectmenu, .select {
     margin-left: 20px;
 }
 
-.select:hover {
+.select {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.select:hover, .select span img {
     cursor: pointer;
+}
+
+.select span img {
+    rotate: 180deg;
+    margin-left: 5px;
+}
+
+.custom-optionbox span {
+    position: absolute;
+    right: 20px;
+    top: 17px;
+}
+
+.custom-optionbox p {
+    font-weight: 700;
+}
+
+.select span img, .custom-optionbox span img {
+    width: 20px;
+    height: 20px;
+}
+
+.select span {
+    /* display: inline-block;
+    width: 27px;
+    height: 22px;
+    background: url(../assets/icons/reduce.svg);
+    background-repeat: no-repeat;
+    rotate: 180deg; */
 }
 
 .custom-optionbox {
@@ -352,7 +387,8 @@ select, selectmenu, .select {
 
 /** OPTION BOX */
 .custom-optionbox {
-    width: 170px;
+    /* width: 170px; */
+    width: 120px;
     height: 170px;
     border-radius: 5px;
     background-color: #901C1C;
