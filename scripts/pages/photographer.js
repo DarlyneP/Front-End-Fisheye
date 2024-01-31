@@ -33,6 +33,7 @@ function fillPage(photographer, media) {
     tagline.textContent = photographer.tagline
     const profilePicture = document.querySelector('.photographer--picture img')
     profilePicture.setAttribute("src", `assets/photographers/${photographer.portrait}`)
+    profilePicture.setAttribute("alt", `Profile picture of ${photographer.name}`)
     
     /*
     //& Change title of Contact Me button

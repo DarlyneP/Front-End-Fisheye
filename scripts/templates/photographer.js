@@ -67,6 +67,7 @@ function photographerTemplate(data) {
         //^ pp-top
         const imgTop = document.createElement( 'img' );
         imgTop.setAttribute("src", picture)
+        imgTop.setAttribute("alt", `Profile picture of ${name}`)
         imgTop.classList.add('profilepic')
         imgTop.classList.add('pp--top')
 
