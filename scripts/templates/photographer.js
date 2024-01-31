@@ -3,7 +3,7 @@ function loadUserProfile (event) {
     console.log("id : ", photographerId)
     localStorage.setItem("id", photographerId)
 
-    window.location.replace("photographer.html")
+    window.location.replace("photographer.html") //! Window.location allow navigation between different pages without using the link tag
 }
 
 function photographerTemplate(data) {
