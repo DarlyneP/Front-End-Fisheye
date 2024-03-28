@@ -1,4 +1,5 @@
 import { lightboxDescViaSlider } from "./accessibility/descriptions.js";
+//const { lightboxDescViaSlider } = require("./accessibility/descriptions.js");
 
 // todo : slider navigation with keyboard
 function accessibleLightbox () {

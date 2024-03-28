@@ -57,3 +57,4 @@ async function lightboxDescViaSlider() {
 window.addEventListener("load", allDescriptions);
 
 export { lightboxDescription, lightboxDescViaSlider };
+//module.exports = { lightboxDescription, lightboxDescViaSlider };

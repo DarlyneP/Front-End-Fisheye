@@ -61,6 +61,21 @@ function validateContactForm (event) {
     console.log(inputs[0].value)
     //? is checking validity of inputs mandatory fot this stage of developpment?
     const mail = new ContactForm(inputs[0].value, inputs[1].value, inputs[2].value, message.value)
-    console.log(mail)
-    closeModal()
+    //checkMailInputs(mail)
+    const check = checkMailInputs(mail)
+    console.log(check)
+    if (check === true) {
+        console.log(mail)
+        closeModal()   
+    } else if (check === false) {
+        alert('Veuillez corriger le formulaire'); 
+    }
+}
+
+function checkMailInputs(mail) {
+    const { firstname, lastname, email, message } = mail;
+    let check;
+    //firstname.toLowerCase().match(/[a-z]/g) ? lastname.toLowerCase().match(/[a-z]/g) ? email.toLowerCase().match(/[a-z]/g) ? message.toLowerCase().match(/[a-z]/g) ? check = true : alert('Veuillez corriger le formulaire') : alert('Veuillez corriger le formulaire') : alert('Veuillez corriger le formulaire') : alert('Veuillez corriger le formulaire');
+    firstname.toLowerCase().match(/[a-z]/g) ? lastname.toLowerCase().match(/[a-z]/g) ? email.toLowerCase().match(/[a-z]/g) ? message.toLowerCase().match(/[a-z]/g) ? check = true : check = false : check = false : check = false : check = false;
+    return check
 }

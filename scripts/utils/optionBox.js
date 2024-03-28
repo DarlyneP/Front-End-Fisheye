@@ -1,4 +1,5 @@
 import { fillPage } from "../pages/photographer.js";
+import { setLightboxFeature } from "./lightbox.js";
 //* Create custom option box
 const select = document.querySelector('.select');
 // const select = document.querySelector('select');
@@ -181,6 +182,7 @@ async function fillMediaSorted(sortedMedia) {
     let photographerId = localStorage.id
     const photographer = photographers.find( element => element.id == photographerId )
     fillPage(photographer, sortedMedia)
+    setLightboxFeature()
 }
 
 /*async function findPhotographer() {

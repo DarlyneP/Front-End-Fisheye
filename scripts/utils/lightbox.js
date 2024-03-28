@@ -366,3 +366,4 @@ function setLightboxFeature() {
 
 //setLightboxFeature() //~ commented because the page needs to be loaded first before this function executes itself
 window.addEventListener("load", setLightboxFeature) //? This function is set on load so that it launches only after the page is loaded, else it cannot find the elements to add events listeners to
+export { setLightboxFeature };
